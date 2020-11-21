@@ -2,4 +2,11 @@
 <!--跟标签beans，里面配置一个又一个的bean子标签，每一个bean子标签都代表一个类的配置-->
 <beans>
 
+    <bean id="accountDao" class="com.pengheng.dao.impl.JdbcAccountDaoImpl">
+
+    </bean>
+
+    <bean id="transferService" class = "com.pengheng.service.impl.TransferServiceImpl">
+
+    </bean>
 </beans>

@@ -1,9 +1,9 @@
 package com.pengheng.servlet;
 
-import com.pengheng.service.impl.TransferServiceImpl;
-import com.pengheng.utils.JsonUtils;
+import com.pengheng.factory.BeanFactory;
 import com.pengheng.pojo.Result;
 import com.pengheng.service.TransferService;
+import com.pengheng.utils.JsonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +18,10 @@ import java.io.IOException;
 @WebServlet(name="transferServlet",urlPatterns = "/transferServlet")
 public class TransferServlet extends HttpServlet {
 
-    // 1. 实例化service层对象
-    private TransferService transferService = new TransferServiceImpl();
+    // 1. 通过实例化创建对象
+    //private TransferService transferService = new TransferServiceImpl();
+    // 2. 通过工厂创建对象
+    private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
