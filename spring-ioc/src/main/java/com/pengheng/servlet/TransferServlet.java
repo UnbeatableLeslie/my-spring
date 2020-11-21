@@ -22,7 +22,6 @@ public class TransferServlet extends HttpServlet {
     //private TransferService transferService = new TransferServiceImpl();
     // 2. 通过工厂创建对象
     private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req,resp);
@@ -55,5 +54,9 @@ public class TransferServlet extends HttpServlet {
         // 响应
         resp.setContentType("application/json;charset=utf-8");
         resp.getWriter().print(JsonUtils.object2Json(result));
+    }
+
+    public void setTransferService(TransferService transferService) {
+        this.transferService = transferService;
     }
 }

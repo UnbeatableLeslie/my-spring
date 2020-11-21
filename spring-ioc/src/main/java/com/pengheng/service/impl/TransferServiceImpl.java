@@ -1,7 +1,6 @@
 package com.pengheng.service.impl;
 
 import com.pengheng.dao.AccountDao;
-import com.pengheng.factory.BeanFactory;
 import com.pengheng.pojo.Account;
 import com.pengheng.service.TransferService;
 
@@ -12,8 +11,14 @@ public class TransferServiceImpl implements TransferService {
 
     //1.通过实例化创建对象
 //    private AccountDao accountDao = new JdbcAccountDaoImpl();
-    //2.通过
-    private AccountDao accountDao = (AccountDao) BeanFactory.getBean("accountDao");
+    //2.通过工厂实例化对象
+//    private AccountDao accountDao = (AccountDao) BeanFactory.getBean("accountDao");
+    //3.通过set方法实例化对象
+    private AccountDao accountDao;
+
+    public void setAccountDao(AccountDao accountDao) {
+        this.accountDao = accountDao;
+    }
 
     @Override
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {

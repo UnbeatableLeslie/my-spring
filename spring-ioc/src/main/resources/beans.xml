@@ -7,6 +7,6 @@
     </bean>
 
     <bean id="transferService" class = "com.pengheng.service.impl.TransferServiceImpl">
-
+        <property name="AccountDao" ref="accountDao"></property>
     </bean>
 </beans>
