@@ -29,10 +29,6 @@ public class TransferServlet extends HttpServlet {
     private ProxyFactory proxyFactory = (ProxyFactory) BeanFactory.getBean("proxyFactory");
     private TransferService transferService = (TransferService) proxyFactory.getJDKProxy(BeanFactory.getBean("transferService"));
 
-    public void setProxyFactory(ProxyFactory proxyFactory) {
-        this.proxyFactory = proxyFactory;
-    }
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
