@@ -1,5 +1,6 @@
 package com.pengheng.utils;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -8,13 +9,18 @@ import java.sql.SQLException;
  */
 public class ConnectionUtils {
 
-    private ConnectionUtils() {
-    }
+//    private ConnectionUtils() {
+//    }
+//
+//    public static ConnectionUtils connectionUtils = new ConnectionUtils();
+//
+//    public static ConnectionUtils getInstance() {
+//        return connectionUtils;
+//    }
+    private DataSource dataSource;
 
-    public static ConnectionUtils connectionUtils = new ConnectionUtils();
-
-    public static ConnectionUtils getInstance() {
-        return connectionUtils;
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     //通过ThreadLocal做到线程数据隔离，每个线程保有一份数据库连接信息
@@ -29,7 +35,7 @@ public class ConnectionUtils {
     public Connection getCurrentThreadConn() throws SQLException {
         Connection conn = local.get();
         if (conn == null) {
-            conn = DruidUtils.getInstance().getConnection();
+            conn = dataSource.getConnection();
             local.set(conn);
         }
         return conn;

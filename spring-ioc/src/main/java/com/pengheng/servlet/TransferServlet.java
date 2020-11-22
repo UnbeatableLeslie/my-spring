@@ -16,17 +16,25 @@ import java.io.IOException;
 /**
  * @author pengheng
  */
-@WebServlet(name="transferServlet",urlPatterns = "/transferServlet")
+@WebServlet(name = "transferServlet", urlPatterns = "/transferServlet")
 public class TransferServlet extends HttpServlet {
 
-    // 1. 通过实例化创建对象
-    //private TransferService transferService = new TransferServiceImpl();
-    // 2. 通过工厂创建对象
+//    1. 通过实例化创建对象
+//    private TransferService transferService = new TransferServiceImpl();
+//    2. 通过工厂创建对象
 //    private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
-    // 3.通过动态代理获取 添加事务增强的trnasferService对象
-    private TransferService transferService = (TransferService) ProxyFactory.getJDKProxy(BeanFactory.getBean("transferService"));
+//    3.通过动态代理获取 添加事务增强的trnasferService对象
+//    private TransferService transferService = (TransferService) ProxyFactory.getInstance().getJDKProxy(BeanFactory.getBean("transferService"));
+
+    private ProxyFactory proxyFactory = (ProxyFactory) BeanFactory.getBean("proxyFactory");
+    private TransferService transferService = (TransferService) proxyFactory.getJDKProxy(BeanFactory.getBean("transferService"));
+
+    public void setProxyFactory(ProxyFactory proxyFactory) {
+        this.proxyFactory = proxyFactory;
+    }
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -45,7 +53,7 @@ public class TransferServlet extends HttpServlet {
         try {
 
             // 2. 调用service层方法
-            transferService.transfer(fromCardNo,toCardNo,money);
+            transferService.transfer(fromCardNo, toCardNo, money);
             result.setStatus("200");
         } catch (Exception e) {
             e.printStackTrace();

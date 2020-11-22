@@ -2,11 +2,23 @@
 <!--跟标签beans，里面配置一个又一个的bean子标签，每一个bean子标签都代表一个类的配置-->
 <beans>
 
-    <bean id="accountDao" class="com.pengheng.dao.impl.JdbcAccountDaoImpl">
+    <bean id="accountDao" class="com.pengheng.dao.impl.JdbcAccountDaoImpl"></bean>
 
-    </bean>
-
-    <bean id="transferService" class = "com.pengheng.service.impl.TransferServiceImpl">
+    <bean id="transferService" class="com.pengheng.service.impl.TransferServiceImpl">
         <property name="AccountDao" ref="accountDao"></property>
     </bean>
+
+    <!--  配置连接bean  -->
+    <bean id="connectionUtils" class="com.pengheng.utils.ConnectionUtils"></bean>
+
+    <!--    配置事务bean-->
+    <bean id="transactionManager" class="com.pengheng.utils.TransactionManager">
+        <property name="ConnectionUtils" ref="connectionUtils"></property>
+    </bean>
+
+    <!--    配置代理bean-->
+    <bean id="proxyFactory" class="com.pengheng.factory.ProxyFactory">
+        <property name="TransactionManager" ref="transactionManager"></property>
+    </bean>
+
 </beans>
