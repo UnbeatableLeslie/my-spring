@@ -58,4 +58,11 @@ public class JdbcAccountDaoImpl implements AccountDao {
         //con.close();
         return i;
     }
+
+    public void init(){
+        System.out.println("测试springBean init 方法");
+    }
+    public void destroy(){
+        System.out.println("测试springBean destroy 方法");
+    }
 }

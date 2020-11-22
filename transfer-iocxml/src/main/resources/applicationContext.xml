@@ -4,16 +4,12 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="accountDao" class="com.pengheng.dao.impl.JdbcAccountDaoImpl">
+    <bean id="accountDao" class="com.pengheng.dao.impl.JdbcAccountDaoImpl" init-method="init" destroy-method="destroy">
         <property name="ConnectionUtils" ref="connectionUtils"></property>
     </bean>
-
     <bean id="transferService" class="com.pengheng.service.impl.TransferServiceImpl">
         <property name="AccountDao" ref="accountDao"></property>
     </bean>
-
-    <!--  配置连接bean  -->
-    <bean id="connectionUtils" class="com.pengheng.utils.ConnectionUtils"></bean>
 
     <!--    配置事务bean-->
     <bean id="transactionManager" class="com.pengheng.utils.TransactionManager">
@@ -25,4 +21,13 @@
         <property name="TransactionManager" ref="transactionManager"></property>
     </bean>
 
+<!--    Spring 实例化Bean的三种方式-->
+<!--    方式一：通过构造函数实例化对象（推荐方式）-->
+    <!--  配置连接bean  -->
+    <bean id="connectionUtils" class="com.pengheng.utils.ConnectionUtils"></bean>
+<!--    方式二：静态方法创建-->
+    <bean id="connectionUtils2" class="com.pengheng.factory.BeanFactory" factory-method="getConnectionUtils"></bean>
+<!--    方式三：-->
+    <bean id="beanFactory" class="com.pengheng.factory.BeanFactory"></bean>
+    <bean id="connectionUtils3" factory-bean="beanFactory" factory-method="getConnection"></bean>
 </beans>
