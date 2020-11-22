@@ -3,7 +3,6 @@ package com.pengheng.service.impl;
 import com.pengheng.dao.AccountDao;
 import com.pengheng.pojo.Account;
 import com.pengheng.service.TransferService;
-import com.pengheng.utils.TransactionManager;
 
 /**
  * @author pengheng
@@ -23,22 +22,22 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
-        try {
-            //开启事务
-            TransactionManager.getInstance().beginTransaction();
-            Account from = accountDao.queryAccountByCardNo(fromCardNo);
-            Account to = accountDao.queryAccountByCardNo(toCardNo);
-            from.setMoney(from.getMoney() - money);
-            to.setMoney(to.getMoney() + money);
-            accountDao.updateAccountByCardNo(to);
-            int i = 1 / 0;
-            accountDao.updateAccountByCardNo(from);
-            //提交事务
-            TransactionManager.getInstance().commit();
-        } catch (Exception e) {
-            //回滚事务
-            TransactionManager.getInstance().rollback();
-            throw e;
-        }
+//        try {
+//            //开启事务
+//            TransactionManager.getInstance().beginTransaction();
+        Account from = accountDao.queryAccountByCardNo(fromCardNo);
+        Account to = accountDao.queryAccountByCardNo(toCardNo);
+        from.setMoney(from.getMoney() - money);
+        to.setMoney(to.getMoney() + money);
+        accountDao.updateAccountByCardNo(to);
+        int i = 1 / 0;
+        accountDao.updateAccountByCardNo(from);
+//            //提交事务
+//            TransactionManager.getInstance().commit();
+//        } catch (Exception e) {
+//            //回滚事务
+//            TransactionManager.getInstance().rollback();
+//            throw e;
+//        }
     }
 }

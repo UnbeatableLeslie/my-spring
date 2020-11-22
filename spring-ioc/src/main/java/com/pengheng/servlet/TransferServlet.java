@@ -1,6 +1,7 @@
 package com.pengheng.servlet;
 
 import com.pengheng.factory.BeanFactory;
+import com.pengheng.factory.ProxyFactory;
 import com.pengheng.pojo.Result;
 import com.pengheng.service.TransferService;
 import com.pengheng.utils.JsonUtils;
@@ -21,8 +22,9 @@ public class TransferServlet extends HttpServlet {
     // 1. 通过实例化创建对象
     //private TransferService transferService = new TransferServiceImpl();
     // 2. 通过工厂创建对象
-    private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
-    @Override
+//    private TransferService transferService = (TransferService) BeanFactory.getBean("transferService");
+    // 3.通过动态代理获取 添加事务增强的trnasferService对象
+    private TransferService transferService = (TransferService) ProxyFactory.getJDKProxy(BeanFactory.getBean("transferService"));
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req,resp);
     }
