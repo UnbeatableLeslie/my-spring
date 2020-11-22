@@ -4,9 +4,23 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--    通过value 和 ref 赋值-->
     <bean id="accountDao" class="com.pengheng.dao.impl.JdbcAccountDaoImpl" init-method="init" destroy-method="destroy">
         <property name="ConnectionUtils" ref="connectionUtils"></property>
+        <property name="name" value="张三"></property>
+        <property name="sex" value="0"></property>
+        <property name="money" value="100"></property>
     </bean>
+<!--    通过构造器注入-->
+    <bean id="accountDao1" class="com.pengheng.dao.impl.JdbcAccountDaoImpl" init-method="init" destroy-method="destroy">
+        <constructor-arg index="0" ref="connectionUtils"></constructor-arg>
+        <constructor-arg index="1" value="李四"></constructor-arg>
+        <constructor-arg index="2" value="1"></constructor-arg>
+        <constructor-arg index="3" value="100"></constructor-arg>
+
+    </bean>
+
+
     <bean id="transferService" class="com.pengheng.service.impl.TransferServiceImpl">
         <property name="AccountDao" ref="accountDao"></property>
     </bean>
@@ -21,13 +35,13 @@
         <property name="TransactionManager" ref="transactionManager"></property>
     </bean>
 
-<!--    Spring 实例化Bean的三种方式-->
-<!--    方式一：通过构造函数实例化对象（推荐方式）-->
+    <!--    Spring 实例化Bean的三种方式-->
+    <!--    方式一：通过构造函数实例化对象（推荐方式）-->
     <!--  配置连接bean  -->
     <bean id="connectionUtils" class="com.pengheng.utils.ConnectionUtils"></bean>
-<!--    方式二：静态方法创建-->
+    <!--    方式二：静态方法创建-->
     <bean id="connectionUtils2" class="com.pengheng.factory.BeanFactory" factory-method="getConnectionUtils"></bean>
-<!--    方式三：-->
+    <!--    方式三：-->
     <bean id="beanFactory" class="com.pengheng.factory.BeanFactory"></bean>
     <bean id="connectionUtils3" factory-bean="beanFactory" factory-method="getConnection"></bean>
 </beans>

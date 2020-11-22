@@ -13,6 +13,7 @@ import java.sql.ResultSet;
  */
 public class JdbcAccountDaoImpl implements AccountDao {
 
+
     private ConnectionUtils connectionUtils;
 
     public void setConnectionUtils(ConnectionUtils connectionUtils) {
@@ -64,5 +65,42 @@ public class JdbcAccountDaoImpl implements AccountDao {
     }
     public void destroy(){
         System.out.println("测试springBean destroy 方法");
+    }
+
+
+    private String name;
+    private int sex;
+    private float money;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public void setMoney(float money) {
+        this.money = money;
+    }
+
+    public JdbcAccountDaoImpl() {
+    }
+
+    public JdbcAccountDaoImpl(ConnectionUtils connectionUtils, String name, int sex, float money) {
+        this.connectionUtils = connectionUtils;
+        this.name = name;
+        this.sex = sex;
+        this.money = money;
+    }
+
+    @Override
+    public String toString() {
+        return "JdbcAccountDaoImpl{" +
+                "connectionUtils=" + connectionUtils +
+                ", name='" + name + '\'' +
+                ", sex=" + sex +
+                ", money=" + money +
+                '}';
     }
 }
