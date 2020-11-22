@@ -1,7 +1,7 @@
 package com.pengheng.dao.impl;
 
-import com.pengheng.pojo.Account;
 import com.pengheng.dao.AccountDao;
+import com.pengheng.pojo.Account;
 import com.pengheng.utils.DruidUtils;
 
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * @author 应癫
+ * @author pengheng
  */
 public class JdbcAccountDaoImpl implements AccountDao {
 

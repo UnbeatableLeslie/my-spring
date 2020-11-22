@@ -1,9 +1,9 @@
 package com.pengheng.servlet;
 
-import com.pengheng.service.impl.TransferServiceImpl;
-import com.pengheng.utils.JsonUtils;
 import com.pengheng.pojo.Result;
 import com.pengheng.service.TransferService;
+import com.pengheng.service.impl.TransferServiceImpl;
+import com.pengheng.utils.JsonUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author 应癫
+ * @author pengheng
  */
 @WebServlet(name="transferServlet",urlPatterns = "/transferServlet")
 public class TransferServlet extends HttpServlet {

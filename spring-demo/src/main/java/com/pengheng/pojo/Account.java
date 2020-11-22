@@ -1,7 +1,7 @@
 package com.pengheng.pojo;
 
 /**
- * @author 应癫
+ * @author pengheng
  */
 public class Account {
 

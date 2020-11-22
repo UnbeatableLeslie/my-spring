@@ -6,7 +6,7 @@ import com.pengheng.pojo.Account;
 import com.pengheng.service.TransferService;
 
 /**
- * @author 应癫
+ * @author pengheng
  */
 public class TransferServiceImpl implements TransferService {
 

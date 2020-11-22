@@ -1,15 +1,15 @@
 package com.pengheng.dao.impl;
 
-import com.pengheng.pojo.Account;
 import com.pengheng.dao.AccountDao;
-import com.pengheng.utils.DruidUtils;
+import com.pengheng.pojo.Account;
+import com.pengheng.utils.ConnectionUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * @author 应癫
+ * @author pengheng
  */
 public class JdbcAccountDaoImpl implements AccountDao {
 
@@ -17,7 +17,7 @@ public class JdbcAccountDaoImpl implements AccountDao {
     @Override
     public Account queryAccountByCardNo(String cardNo) throws Exception {
         //从连接池获取连接
-         Connection con = DruidUtils.getInstance().getConnection();
+        Connection con = ConnectionUtils.getInstance().getCurrentThreadConn();
         String sql = "select * from account where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setString(1,cardNo);
@@ -42,7 +42,7 @@ public class JdbcAccountDaoImpl implements AccountDao {
 
         // 从连接池获取连接
         // 改造为：从当前线程当中获取绑定的connection连接
-        Connection con = DruidUtils.getInstance().getConnection();
+        Connection con = ConnectionUtils.getInstance().getCurrentThreadConn();
         String sql = "update account set money=? where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setInt(1,account.getMoney());

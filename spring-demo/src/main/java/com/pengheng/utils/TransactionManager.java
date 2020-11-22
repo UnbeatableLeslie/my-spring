@@ -3,7 +3,7 @@ package com.pengheng.utils;
 import java.sql.SQLException;
 
 /**
- * @author 应癫
+ * @author pengheng
  *
  * 事务管理器类：负责手动事务的开启、提交、回滚
  */

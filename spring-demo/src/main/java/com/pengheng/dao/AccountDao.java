@@ -3,7 +3,7 @@ package com.pengheng.dao;
 import com.pengheng.pojo.Account;
 
 /**
- * @author 应癫
+ * @author pengheng
  */
 public interface AccountDao {
 
