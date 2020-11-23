@@ -25,3 +25,4 @@ hs_err_pid*
 /transfer-ioc/target/
 /transfer-iocxml/target/
 /transfer-ioc-xml-anno/target/
+/transfer-ioc-anno/target/
