@@ -19,4 +19,11 @@
         <property name="password" value="${jdbc.password}"></property>
     </bean>
 
+    <!--    通过 lazy-init 配置延迟加载bean-->
+    <bean id="lazyResult" class="com.pengheng.pojo.Result" lazy-init="true" init-method="initMethod" destroy-method="destoryMethod"></bean>
+
+    <bean id ="companyFactoryBean" class="com.pengheng.factory.CompanyFactoryBean">
+        <property name="companyInfo" value="数商云,广州,100"></property>
+    </bean>
+
 </beans>
