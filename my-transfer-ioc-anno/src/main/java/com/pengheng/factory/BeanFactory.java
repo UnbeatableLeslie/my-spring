@@ -88,7 +88,7 @@ public class BeanFactory {
     public static Object getBean(String id) {
         Object o = map.get(id);
         Boolean needProxy = false;
-        ProxyFactory proxyFactory = (ProxyFactory) map.get("proxyFactory");
+        ProxyFactory proxyFactory = getBean(ProxyFactory.class);
         Transactional classTransaction = o.getClass().getAnnotation(Transactional.class);
         if (classTransaction != null) {
             needProxy = true;
@@ -103,6 +103,18 @@ public class BeanFactory {
         }
         return needProxy ? proxyFactory.getJDKProxy(o) : o;
     }
+
+    public static <T> T getBean(Class<T> requiredType){
+        for (String key : map.keySet()) {
+            Object o = map.get(key);
+            //如果类型匹配 返回对象
+            if(o.getClass().equals(requiredType)){
+                return (T) o;
+            }
+        }
+        throw new RuntimeException("未找到对象");
+    }
+
 
     public static String getClazzId(Class<?> clazz) {
         Repository repository = clazz.getAnnotation(Repository.class);
